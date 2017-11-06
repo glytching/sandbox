@@ -2,13 +2,15 @@ language: java
 sudo: false
 script: mvn test javadoc:javadoc
 
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: target/site/apidocs
-  github_token: 473faff4af91b23a95c4e58fb1682322b7a96ed3
-  on:
-    branch: master
+#deploy:
+#  provider: pages
+#  skip_cleanup: true
+#  local_dir: target/site/apidocs
+#  on:
+#    branch: master
+
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report -DrepoToken=vOqwyAtdaMwCCFpe5dtjl0S6AcDIsfPre
 
 notifications:
   email:
