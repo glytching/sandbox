@@ -9,3 +9,8 @@ deploy:
   github_token: 473faff4af91b23a95c4e58fb1682322b7a96ed3
   on:
     branch: master
+
+notifications:
+  email:
+    on_sucess: never
+    on_failure: always
