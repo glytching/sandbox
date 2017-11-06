@@ -1,3 +1,10 @@
 language: java
 sudo: false
-script: mvn test
+script: mvn test javadoc:javadoc
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: target/site/apidocs
+  on:
+    branch: master
