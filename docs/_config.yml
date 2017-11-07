@@ -1,1 +1,4 @@
 theme: jekyll-theme-minimal
+
+name: This Guy
+markdown: kramdown
