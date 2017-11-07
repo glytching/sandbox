@@ -1,4 +1,5 @@
 theme: jekyll-theme-minimal
 
-name: This Guy
-markdown: kramdown
+title: Sandbox
+description: Sandbox Docs
+show_downloads: false

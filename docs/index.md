@@ -1,7 +1,9 @@
 ---
 layout: default
-title: Sandbox Docs
 ---
-<div class="blurb">
-	<h1>Landing Page</h1>
-</div><!-- /.blurb -->
+
+Text can be **bold**, _italic_, or ~~strikethrough~~.
+
+[Link to another page](another-page).
+
+There should be whitespace between paragraphs.
