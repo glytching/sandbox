@@ -28,12 +28,15 @@
 
         <hr/>
 
-
-
         <p class="view">
-            <a href="{{ site.github.repository_url }}"><small>GitHub Project</small></a>
-            |
-            <a href="{{ site.github.owner_url }}"><small>GitHub Profile</small></a>
+            <a href="{{ site.github.repository_url }}">
+                <small>GitHub Project</small>
+            </a>
+        </p>
+        <p class="view">
+            <a href="{{ site.github.owner_url }}">
+                <small>GitHub Profile</small>
+            </a>
         </p>
     </header>
     <section>
@@ -42,12 +45,8 @@
 
     </section>
     <footer>
-        {% if site.github.is_project_page %}
-        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
-        <p>
-            <small>Hosted on GitHub Pages</small>
-        </p>
+        <p>This project is maintained by
+            <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> and Hosted on GitHub Pages</p>
     </footer>
 </div>
 <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
@@ -61,6 +60,7 @@
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         ga('create', '{{ site.google_analytics }}', 'auto');
         ga('send', 'pageview');
+
 
 
 </script>
