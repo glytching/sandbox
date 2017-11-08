@@ -4,7 +4,6 @@ package org.glytching.sandbox;
  * A noddy class to facilitate experimenting with Travis CI integration for:
  * <ul>
  * <li>Generating and publishing Javadocs</li>
- * <li>Generating and publishing code coverage numbers</li>
  * </ul>
  */
 public class Calculator {

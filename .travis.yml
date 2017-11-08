@@ -1,6 +1,6 @@
 language: java
 sudo: false
-script: mvn test javadoc:javadoc
+script: mvn test javadoc:javadoc -Ptravis
 
 #deploy:
 #  provider: pages
@@ -8,9 +8,6 @@ script: mvn test javadoc:javadoc
 #  local_dir: target/site/apidocs
 #  on:
 #    branch: master
-
-after_success:
-  - mvn clean cobertura:cobertura coveralls:report -DrepoToken=vOqwyAtdaMwCCFpe5dtjl0S6AcDIsfPre
 
 notifications:
   email:
