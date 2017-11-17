@@ -3,6 +3,7 @@ package org.glytching.sandbox.jsonpath;
 import com.jayway.jsonpath.Criteria;
 import com.jayway.jsonpath.Filter;
 import com.jayway.jsonpath.JsonPath;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
+import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class JsonPathTest {
@@ -39,6 +40,23 @@ public class JsonPathTest {
         assertThat(authors, hasItem("J. R. R. Tolkien"));
     }
 
+    @Test
+    public void canGetRootNodeNames() {
+        Map<String, Object> read = JsonPath.read(MORE_JSON, "$");
+
+        assertThat(read.size(), is(2));
+
+        assertThat(read.keySet(), hasItem("tool"));
+        assertThat(read.keySet(), hasItem("book"));
+
+        // or if you want a String[] then ...
+        String[] rootNodeNames = read.keySet().toArray(new String[read.size()]);
+        assertThat(rootNodeNames, Matchers.both(arrayWithSize(2)).and(arrayContainingInAnyOrder("book", "tool")));
+
+        // or hide it all behind the hasJsonPath matcher
+        assertThat(MORE_JSON, hasJsonPath("$", Matchers.hasKey("tool")));
+        assertThat(MORE_JSON, hasJsonPath("$", Matchers.hasKey("book")));
+    }
 
     private static final String JSON = "{\n" +
             "    \"store\": {\n" +
@@ -76,5 +94,37 @@ public class JsonPathTest {
             "        }\n" +
             "    },\n" +
             "    \"expensive\": 10\n" +
+            "}";
+
+    private static final String MORE_JSON = "{\n" +
+            "    \"tool\": \n" +
+            "    {\n" +
+            "        \"jsonpath\": \n" +
+            "        {\n" +
+            "            \"creator\": \n" +
+            "            {\n" +
+            "                \"name\": \"Jayway Inc.\",\n" +
+            "                \"location\": \n" +
+            "                [\n" +
+            "                    \"Malmo\",\n" +
+            "                    \"San Francisco\",\n" +
+            "                    \"Helsingborg\"\n" +
+            "                ]\n" +
+            "            }\n" +
+            "        }\n" +
+            "    },\n" +
+            "\n" +
+            "    \"book\": \n" +
+            "    [\n" +
+            "        {\n" +
+            "            \"title\": \"Beginning JSON\",\n" +
+            "            \"price\": 49.99\n" +
+            "        },\n" +
+            "\n" +
+            "        {\n" +
+            "            \"title\": \"JSON at Work\",\n" +
+            "            \"price\": 29.99\n" +
+            "        }\n" +
+            "    ]\n" +
             "}";
 }
