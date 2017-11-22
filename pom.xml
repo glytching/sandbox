@@ -101,10 +101,14 @@
             <version>1.5.0</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryonet</artifactId>
+            <version>2.22.0-RC1</version>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>1.1</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- test -->
@@ -156,7 +160,7 @@
         <profile>
             <id>travis</id>
             <properties>
-                <!-- exclude Mongo , erm, 'tests' when running on Travis (because they rely on a local MongoDB server) -->
+                <!-- exclude Mongo, erm, 'tests' when running on Travis (because they rely on a local MongoDB server) -->
                 <excludedCategories>org.glytching.sandbox.surefire.MongoTests</excludedCategories>
             </properties>
         </profile>
