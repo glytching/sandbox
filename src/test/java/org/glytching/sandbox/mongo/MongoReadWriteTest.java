@@ -10,6 +10,7 @@ import com.mongodb.client.model.ReturnDocument;
 import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 import org.glytching.sandbox.surefire.MongoTests;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -23,6 +24,17 @@ import java.util.List;
 @Category(MongoTests.class)
 public class MongoReadWriteTest {
     private static final Logger logger = LoggerFactory.getLogger(MongoClientTest.class);
+
+    @Test
+    public void canFindByObjectId() {
+        MongoClient mongoClient = new MongoClientFactory().create();
+
+        MongoCollection<Document> collection = mongoClient.getDatabase("stackoverflow").getCollection("sample");
+
+        Document document = collection.find(Filters.eq("_id", new ObjectId("59b86ff639f9ba0f9c0dccf6"))).first();
+
+        logger.info(document.toJson());
+    }
 
     @Test
     public void canWriteAndRead() throws IOException {
