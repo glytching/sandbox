@@ -2,8 +2,10 @@ package org.glytching.sandbox.mongo;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
@@ -19,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Category(MongoTests.class)
@@ -69,5 +72,18 @@ public class MongoReadWriteTest {
                                 .append("definitions", new BsonString("definitionB"))),
                 new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER));
         logger.info("Updated document: {}", updatedDocument.toJson());
+    }
+
+    @Test
+    public void canSample() throws IOException {
+        MongoClient mongoClient = new MongoClientFactory().create();
+
+        MongoCollection<Document> collection = mongoClient.getDatabase("stackoverflow").getCollection("sample");
+
+        AggregateIterable<Document> documents = collection.aggregate(Arrays.asList(Aggregates.sample(1)));
+
+        for (Document d : documents) {
+            logger.info(d.toJson());
+        }
     }
 }
