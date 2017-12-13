@@ -1,12 +1,12 @@
 package org.glytching.sandbox.jsoup;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
+import java.io.FileReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,22 +45,20 @@ public class JSoupTest {
 
         Elements scriptElements = doc.getElementsByTag("script");
 
+        // the script elements have no identifying charateristic so we must loop
+        // until we find the one which contains the "infosite.token" variable
         for (Element element : scriptElements) {
-            for (DataNode node : element.dataNodes()) {
-                // focus on the script element which contains the "infosite.token" variable
-                if (node.getWholeData().contains("infosite.token")) {
-                    Pattern pattern = Pattern.compile(".*=([^;]*);");
-                    Matcher matcher = pattern.matcher(node.getWholeData());
-
-                    // walk through the matcher looking for the group: "infosite.token = '6a06f2f73106c754340f7a459f5d75d588637caa';"
-                    while (matcher.find()) {
-                        if (matcher.group().startsWith("infosite.token")) {
-                            // print out the right hand side of this group
-                            System.out.println(matcher.group(1));
-                            break;
-                        }
-                    }
+            if (element.data().contains("infosite.token")) {
+                // find the line which contains 'infosite.token = <...>;'
+                Pattern pattern = Pattern.compile(".*infosite\\.token = ([^;]*);");
+                Matcher matcher = pattern.matcher(element.data());
+                // we only expect a single match here so there's no need to loop through the matcher's groups
+                if (matcher.find()) {
+                    System.out.println(matcher.group(1));
+                } else {
+                    System.err.println("No match found!");
                 }
+                break;
             }
         }
     }
