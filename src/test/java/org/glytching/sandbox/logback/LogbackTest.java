@@ -32,4 +32,9 @@ public class LogbackTest {
         MDC.put("application", "payment");
         logger.info("{\"a\": 1, \"b\": 2}");
     }
+
+    @Test
+    public void testLogException() {
+        logger.info("Boom!", new RuntimeException("ouch"));
+    }
 }
