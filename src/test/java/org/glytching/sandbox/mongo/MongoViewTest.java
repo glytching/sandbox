@@ -31,7 +31,7 @@ public class MongoViewTest {
 
         String viewName = "latest";
 
-        boolean viewAlreadyExists = database.listCollectionNames().into(new ArrayList<>()).contains(viewName);
+        boolean viewAlreadyExists = collectionOrViewExists(database, viewName);
 
         if (!viewAlreadyExists) {
             logger.info("Creating view with name={}", viewName);
@@ -61,7 +61,7 @@ public class MongoViewTest {
 
         String viewName = "latest";
 
-        boolean viewAlreadyExists = database.listCollectionNames().into(new ArrayList<>()).contains(viewName);
+        boolean viewAlreadyExists = collectionOrViewExists(database, viewName);
 
         if (!viewAlreadyExists) {
             logger.info("Creating view with name={}", viewName);
@@ -80,5 +80,9 @@ public class MongoViewTest {
             logger.info("Dropping view with name={}", viewName);
             view.drop();
         }
+    }
+
+    private boolean collectionOrViewExists(MongoDatabase database, String viewName) {
+        return database.listCollectionNames().into(new ArrayList<>()).contains(viewName);
     }
 }
