@@ -1,8 +1,7 @@
 package org.glytching.sandbox.jsonpath;
 
-import com.jayway.jsonpath.Criteria;
-import com.jayway.jsonpath.Filter;
-import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.*;
+import net.minidev.json.JSONArray;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -17,6 +16,28 @@ import static org.junit.Assert.assertThat;
 
 public class JsonPathTest {
     private static final Logger logger = LoggerFactory.getLogger(JsonPathTest.class);
+
+    @Test
+    public void canReadValueAndPathFromTheSameCompiledJsonPath() {
+        String json = "{\n" +
+                "      \"name\" : \"john\",\n" +
+                "      \"gender\" : \"male\"\n" +
+                "   }";
+
+        Object parse = Configuration.defaultConfiguration()
+                .jsonProvider()
+                .parse(json);
+
+        JsonPath path = JsonPath.compile("$.name");
+
+        JSONArray asPath = path.read(parse, Configuration.builder()
+                .options(Option.AS_PATH_LIST).build());
+        assertThat(asPath.size(), is(1));
+        assertThat(asPath.iterator().next(), is("$['name']"));
+
+        String asValue = path.read(parse);
+        assertThat(asValue, is("john"));
+    }
 
     @Test
     public void canReadUsingACombinedFilter() {
