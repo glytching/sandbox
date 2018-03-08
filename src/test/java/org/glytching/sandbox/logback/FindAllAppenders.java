@@ -27,10 +27,6 @@ public class FindAllAppenders {
     private Map<String, Appender<ILoggingEvent>> getAppendersMap() {
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
 
-        loggerContext.getStatusManager().getCopyOfStatusList();
-        loggerContext.getCopyOfPropertyMap();
-        loggerContext.getLoggerContextRemoteView();
-
         Map<String, Appender<ILoggingEvent>> appendersMap = new HashMap<>();
         for (Logger logger : loggerContext.getLoggerList()) {
 
