@@ -32,7 +32,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.13</version>
+                <version>2.19.1</version>
                 <configuration>
                     <excludedGroups>${excludedCategories}</excludedGroups>
                 </configuration>
@@ -40,6 +40,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

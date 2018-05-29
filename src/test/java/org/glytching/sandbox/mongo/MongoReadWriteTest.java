@@ -23,9 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
+import static com.mongodb.client.model.Filters.eq;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 @Category(MongoTests.class)
@@ -38,7 +37,7 @@ public class MongoReadWriteTest {
 
         MongoCollection<Document> collection = mongoClient.getDatabase("stackoverflow").getCollection("sample");
 
-        Document document = collection.find(Filters.eq("_id", new ObjectId("59b86ff639f9ba0f9c0dccf6"))).first();
+        Document document = collection.find(eq("_id", new ObjectId("59b86ff639f9ba0f9c0dccf6"))).first();
 
         logger.info(document.toJson());
     }
@@ -62,12 +61,13 @@ public class MongoReadWriteTest {
 
         collection.insertOne(document);
 
-        Bson filter = Filters.eq("name", "beep");
+        Bson filter = eq("name", "beep");
         FindIterable<Document> documents = collection.find(filter).batchSize(50).limit(1);
 
 
         for (Document d : documents) {
             logger.info(d.toJson());
+            logger.info(document.get("_id", ObjectId.class).toHexString());
         }
 
         Document updatedDocument = collection.findOneAndUpdate(filter,

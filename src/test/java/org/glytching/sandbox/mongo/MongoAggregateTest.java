@@ -37,6 +37,22 @@ public class MongoAggregateTest {
     }
 
     @Test
+    public void canCompareDateFields() {
+        MongoClient mongoClient = new MongoClientFactory().create();
+
+        MongoCollection<Document> collection = mongoClient.getDatabase("stackoverflow").getCollection("articles");
+
+        List<Document> documents = collection.aggregate(Arrays.asList(
+                new Document("$redact", new Document("$cond",
+                        Arrays.asList(new Document("$gt", Arrays.asList("$pub-date", "$rel-date")), "$$KEEP", "$$PRUNE"))
+                ))).into(new ArrayList<>());
+
+        for (Document document : documents) {
+            logger.info("{}", document.toJson());
+        }
+    }
+
+    @Test
     public void canFilterSubDocumentArray() {
         MongoClient mongoClient = new MongoClientFactory().create();
 
