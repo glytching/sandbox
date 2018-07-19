@@ -1,6 +1,9 @@
 package org.glytching.sandbox.jsonpath;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.*;
+import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import net.minidev.json.JSONArray;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -16,6 +19,22 @@ import static org.junit.Assert.assertThat;
 
 public class JsonPathTest {
     private static final Logger logger = LoggerFactory.getLogger(JsonPathTest.class);
+
+    @Test
+    public void canReadAnIntegerAsLong() {
+        String payload = "{\"order\": { \"date\": 1531380888 } }";
+
+        ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
+
+        Configuration conf = Configuration.builder()
+                .jsonProvider(new JacksonJsonProvider(objectMapper))
+                .build();
+
+        Object rawJson = conf.jsonProvider().parse(payload);
+        Long orderDate = JsonPath.read(rawJson, "$.order.date");
+
+        assertThat(orderDate, is(1531380888L));
+    }
 
     @Test
     public void canReadValueAndPathFromTheSameCompiledJsonPath() {

@@ -1,6 +1,6 @@
 language: java
 sudo: false
-script: mvn test javadoc:javadoc -Ptravis
+script: mvn verify javadoc:javadoc -Ptravis
 
 #deploy:
 #  provider: pages
