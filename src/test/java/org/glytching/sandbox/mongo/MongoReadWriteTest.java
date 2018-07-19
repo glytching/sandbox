@@ -19,8 +19,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -30,6 +33,24 @@ import static org.junit.Assert.assertThat;
 @Category(MongoTests.class)
 public class MongoReadWriteTest {
     private static final Logger logger = LoggerFactory.getLogger(MongoClientTest.class);
+
+    @Test
+    public void canReadDate() {
+        MongoClient mongoClient = new MongoClientFactory().create();
+
+        MongoCollection<Document> collection = mongoClient.getDatabase("stackoverflow").getCollection("device");
+
+        Document document = collection.find().iterator().next();
+        System.out.println(document.toJson());
+        // now you have a Date object ...
+        Date cob = document.getDate("COBDate");
+
+        /// ... which you can use _as is_ or format into a String as follows ...
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+        /// this will print: 2018-02-15T18:30:00.000Z
+        System.out.println(df.format(cob));
+    }
 
     @Test
     public void canFindByObjectId() {
