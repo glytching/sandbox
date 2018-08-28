@@ -1,11 +1,11 @@
 package org.glytching.sandbox.hamcrest.matchers;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.glytching.sandbox.hamcrest.matchers.IgnoresAllWhitespacesMatcher.ignoresAllWhitespaces;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
 
 public class EqualsIgnoringWhitespaceTest {
 

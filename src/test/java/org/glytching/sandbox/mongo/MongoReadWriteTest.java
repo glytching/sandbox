@@ -26,8 +26,8 @@ import java.util.Date;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 public class MongoReadWriteTest {
     private static final Logger logger = LoggerFactory.getLogger(MongoClientTest.class);
