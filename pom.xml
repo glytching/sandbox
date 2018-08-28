@@ -10,7 +10,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <excludedCategories></excludedCategories>
+        <junit.jupiter.version>5.2.0</junit.jupiter.version>
+        <junit.platform.version>1.2.0</junit.platform.version>
+        <!--<excludedCategories></excludedCategories>-->
+        <testExclusionPattern></testExclusionPattern>
     </properties>
 
     <build>
@@ -34,8 +37,31 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
-                    <excludedGroups>${excludedCategories}</excludedGroups>
+                    <excludes>
+                        <exclude>${testExclusionPattern}</exclude>
+                    </excludes>
+                    <!--<excludedGroups>${excludedCategories}</excludedGroups>-->
                 </configuration>
+                <dependencies>
+                    <!-- integrates JUnit5 with surefire -->
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit.platform.version}</version>
+                    </dependency>
+                    <!-- ensures that a JUnit5-aware test engine is available on the classpath when running Surefire -->
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>${junit.jupiter.version}</version>
+                    </dependency>
+                    <!-- ensures that a JUnit4-aware test engine is available on the classpath when running Surefire -->
+                    <dependency>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                        <version>${junit.jupiter.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -131,7 +157,7 @@
             <version>2.22.0-RC1</version>
         </dependency>
         <dependency>
-        <groupId>org.apache.commons</groupId>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>1.1</version>
         </dependency>
@@ -141,13 +167,54 @@
             <version>2.6</version>
         </dependency>
 
-        <!-- test -->
+        <!--
+            The many, many JUnit5 dependencies:
+             * junit-jupiter-api: for writing JUnit5 tests
+             * junit-jupiter-engine: for running JUnit5 tests
+             * junit-vintage-engine: for running JUnit4 tests
+             * junit-platform-xxx: the foundation for JUnit5
+        -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <!--
+                    excluded to prevent accidental use of JUnit4 constructs
+                    we 'get' JUnit4 constructs from the junit-vintage-engine dependency
+                -->
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
@@ -171,6 +238,12 @@
             <artifactId>powermock-module-junit4</artifactId>
             <version>1.7.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
@@ -209,7 +282,8 @@
             <id>travis</id>
             <properties>
                 <!-- exclude Mongo, erm, 'tests' when running on Travis (because they rely on a local MongoDB server) -->
-                <excludedCategories>org.glytching.sandbox.surefire.MongoTests</excludedCategories>
+                <!--<excludedCategories>org.glytching.sandbox.surefire.MongoTests</excludedCategories>-->
+                <testExclusionPattern>**/Mongo*Test*</testExclusionPattern>
             </properties>
         </profile>
     </profiles>
