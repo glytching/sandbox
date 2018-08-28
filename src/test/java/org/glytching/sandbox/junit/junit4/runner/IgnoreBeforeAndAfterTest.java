@@ -1,4 +1,4 @@
-package org.glytching.sandbox.junit.runner;
+package org.glytching.sandbox.junit.junit4.runner;
 
 import org.junit.After;
 import org.junit.Assert;

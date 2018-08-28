@@ -1,4 +1,4 @@
-package org.glytching.sandbox.junit.rule;
+package org.glytching.sandbox.junit.junit4.rule;
 
 import org.junit.rules.ExternalResource;
 

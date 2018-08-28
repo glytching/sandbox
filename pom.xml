@@ -282,7 +282,6 @@
             <id>travis</id>
             <properties>
                 <!-- exclude Mongo, erm, 'tests' when running on Travis (because they rely on a local MongoDB server) -->
-                <!--<excludedCategories>org.glytching.sandbox.surefire.MongoTests</excludedCategories>-->
                 <testExclusionPattern>**/Mongo*Test*</testExclusionPattern>
             </properties>
         </profile>

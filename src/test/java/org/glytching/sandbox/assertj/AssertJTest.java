@@ -1,6 +1,7 @@
 package org.glytching.sandbox.assertj;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,11 +17,13 @@ public class AssertJTest {
         assertThat(array).containsExactlyInAnyOrder(firstElement, secondElement);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void cannotMatchArrayWithSingleValueByNonSpecificType() {
-        Object[] array = new Object[1];
-        String[] element = new String[]{"Hello"};
-        array[0] = element;
-        assertThat(array).containsExactlyInAnyOrder(element);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            Object[] array = new Object[1];
+            String[] element = new String[]{"Hello"};
+            array[0] = element;
+            assertThat(array).containsExactlyInAnyOrder(element);
+        });
     }
 }

@@ -12,9 +12,7 @@ import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-import org.glytching.sandbox.surefire.MongoTests;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +28,6 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
-@Category(MongoTests.class)
 public class MongoReadWriteTest {
     private static final Logger logger = LoggerFactory.getLogger(MongoClientTest.class);
 

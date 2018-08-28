@@ -1,4 +1,4 @@
-package org.glytching.sandbox.junit.parameterised;
+package org.glytching.sandbox.junit.junit4.parameterised;
 
 import org.junit.Before;
 import org.junit.Test;

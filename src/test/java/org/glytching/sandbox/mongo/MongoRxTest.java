@@ -5,9 +5,7 @@ import com.mongodb.rx.client.MongoClients;
 import com.mongodb.rx.client.MongoCollection;
 import com.mongodb.rx.client.MongoDatabase;
 import org.bson.Document;
-import org.glytching.sandbox.surefire.MongoTests;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observer;
@@ -21,7 +19,6 @@ import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Projections.excludeId;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-@Category(MongoTests.class)
 public class MongoRxTest {
     private static final Logger logger = LoggerFactory.getLogger(MongoRxTest.class);
 

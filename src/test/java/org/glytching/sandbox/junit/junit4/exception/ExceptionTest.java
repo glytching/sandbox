@@ -1,4 +1,4 @@
-package org.glytching.sandbox.junit.exception;
+package org.glytching.sandbox.junit.junit4.exception;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package org.glytching.sandbox.junit.exception;
+package org.glytching.sandbox.junit.junit4.exception;
 
 public class ExceptionSUT {
 
