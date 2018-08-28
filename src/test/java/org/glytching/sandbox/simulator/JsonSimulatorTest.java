@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.jayway.awaitility.Awaitility;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;
@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.String.format;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
 
 public class JsonSimulatorTest {
     private static final Logger logger = LoggerFactory.getLogger(JsonSimulatorTest.class);
@@ -27,7 +27,7 @@ public class JsonSimulatorTest {
 
     private JsonSimulator simulator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         simulator = new SimulatorBuilder()
                 .withDelay(new EveryNElementSimulatorDelay(2, 50))

@@ -4,8 +4,7 @@ import com.google.common.collect.Lists;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
@@ -15,6 +14,7 @@ import java.util.Locale;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HamcrestTest {
 
@@ -59,8 +59,8 @@ public class HamcrestTest {
         Mockito.verify(mock).getMessage(Mockito.anyString(), (Object[]) captor.capture(), Mockito.any(Locale.class));
 
         List<Object> actualArgs = Arrays.asList((Object[]) captor.getValue());
-        Assert.assertEquals(10, actualArgs.size());
-        Assert.assertEquals("CHF", actualArgs.get(9));
+        assertEquals(10, actualArgs.size());
+        assertEquals("CHF", actualArgs.get(9));
     }
 
     private Matcher<HamcrestSUT> isEquivalent(final int id, final String name) {

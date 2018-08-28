@@ -6,7 +6,7 @@ import com.jayway.jsonpath.*;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import net.minidev.json.JSONArray;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,11 +14,80 @@ import java.util.List;
 import java.util.Map;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+
 
 public class JsonPathTest {
     private static final Logger logger = LoggerFactory.getLogger(JsonPathTest.class);
+    private static final String JSON = "{\n" +
+            "    \"store\": {\n" +
+            "        \"book\": [\n" +
+            "            {\n" +
+            "                \"category\": \"reference\",\n" +
+            "                \"author\": \"Nigel Rees\",\n" +
+            "                \"title\": \"Sayings of the Century\",\n" +
+            "                \"price\": 8.95\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"category\": \"fiction\",\n" +
+            "                \"author\": \"Evelyn Waugh\",\n" +
+            "                \"title\": \"Sword of Honour\",\n" +
+            "                \"price\": 12.99\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"category\": \"fiction\",\n" +
+            "                \"author\": \"Herman Melville\",\n" +
+            "                \"title\": \"Moby Dick\",\n" +
+            "                \"isbn\": \"0-553-21311-3\",\n" +
+            "                \"price\": 8.99\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"category\": \"fiction\",\n" +
+            "                \"author\": \"J. R. R. Tolkien\",\n" +
+            "                \"title\": \"The Lord of the Rings\",\n" +
+            "                \"isbn\": \"0-395-19395-8\",\n" +
+            "                \"price\": 22.99\n" +
+            "            }\n" +
+            "        ],\n" +
+            "        \"bicycle\": {\n" +
+            "            \"color\": \"red\",\n" +
+            "            \"price\": 19.95\n" +
+            "        }\n" +
+            "    },\n" +
+            "    \"expensive\": 10\n" +
+            "}";
+    private static final String MORE_JSON = "{\n" +
+            "    \"tool\": \n" +
+            "    {\n" +
+            "        \"jsonpath\": \n" +
+            "        {\n" +
+            "            \"creator\": \n" +
+            "            {\n" +
+            "                \"name\": \"Jayway Inc.\",\n" +
+            "                \"location\": \n" +
+            "                [\n" +
+            "                    \"Malmo\",\n" +
+            "                    \"San Francisco\",\n" +
+            "                    \"Helsingborg\"\n" +
+            "                ]\n" +
+            "            }\n" +
+            "        }\n" +
+            "    },\n" +
+            "\n" +
+            "    \"book\": \n" +
+            "    [\n" +
+            "        {\n" +
+            "            \"title\": \"Beginning JSON\",\n" +
+            "            \"price\": 49.99\n" +
+            "        },\n" +
+            "\n" +
+            "        {\n" +
+            "            \"title\": \"JSON at Work\",\n" +
+            "            \"price\": 29.99\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}";
 
     @Test
     public void canReadAnIntegerAsLong() {
@@ -97,74 +166,4 @@ public class JsonPathTest {
         assertThat(MORE_JSON, hasJsonPath("$", Matchers.hasKey("tool")));
         assertThat(MORE_JSON, hasJsonPath("$", Matchers.hasKey("book")));
     }
-
-    private static final String JSON = "{\n" +
-            "    \"store\": {\n" +
-            "        \"book\": [\n" +
-            "            {\n" +
-            "                \"category\": \"reference\",\n" +
-            "                \"author\": \"Nigel Rees\",\n" +
-            "                \"title\": \"Sayings of the Century\",\n" +
-            "                \"price\": 8.95\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"category\": \"fiction\",\n" +
-            "                \"author\": \"Evelyn Waugh\",\n" +
-            "                \"title\": \"Sword of Honour\",\n" +
-            "                \"price\": 12.99\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"category\": \"fiction\",\n" +
-            "                \"author\": \"Herman Melville\",\n" +
-            "                \"title\": \"Moby Dick\",\n" +
-            "                \"isbn\": \"0-553-21311-3\",\n" +
-            "                \"price\": 8.99\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"category\": \"fiction\",\n" +
-            "                \"author\": \"J. R. R. Tolkien\",\n" +
-            "                \"title\": \"The Lord of the Rings\",\n" +
-            "                \"isbn\": \"0-395-19395-8\",\n" +
-            "                \"price\": 22.99\n" +
-            "            }\n" +
-            "        ],\n" +
-            "        \"bicycle\": {\n" +
-            "            \"color\": \"red\",\n" +
-            "            \"price\": 19.95\n" +
-            "        }\n" +
-            "    },\n" +
-            "    \"expensive\": 10\n" +
-            "}";
-
-    private static final String MORE_JSON = "{\n" +
-            "    \"tool\": \n" +
-            "    {\n" +
-            "        \"jsonpath\": \n" +
-            "        {\n" +
-            "            \"creator\": \n" +
-            "            {\n" +
-            "                \"name\": \"Jayway Inc.\",\n" +
-            "                \"location\": \n" +
-            "                [\n" +
-            "                    \"Malmo\",\n" +
-            "                    \"San Francisco\",\n" +
-            "                    \"Helsingborg\"\n" +
-            "                ]\n" +
-            "            }\n" +
-            "        }\n" +
-            "    },\n" +
-            "\n" +
-            "    \"book\": \n" +
-            "    [\n" +
-            "        {\n" +
-            "            \"title\": \"Beginning JSON\",\n" +
-            "            \"price\": 49.99\n" +
-            "        },\n" +
-            "\n" +
-            "        {\n" +
-            "            \"title\": \"JSON at Work\",\n" +
-            "            \"price\": 29.99\n" +
-            "        }\n" +
-            "    ]\n" +
-            "}";
 }

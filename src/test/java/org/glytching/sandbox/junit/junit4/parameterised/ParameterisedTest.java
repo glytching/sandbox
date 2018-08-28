@@ -20,19 +20,14 @@ public class ParameterisedTest {
     private Boolean expectedResult;
     private ParameterisedSUT primeNumberChecker;
 
-    @Before
-    public void initialize() {
-        primeNumberChecker = new ParameterisedSUT();
+    public ParameterisedTest(Integer inputNumber, Boolean expectedResult) {
+        this.inputNumber = inputNumber;
+        this.expectedResult = expectedResult;
     }
 
     // Each parameter should be placed as an argument here
     // Every time runner triggers, it will pass the arguments
     // from parameters we defined in primeNumbers() method
-
-    public ParameterisedTest(Integer inputNumber, Boolean expectedResult) {
-        this.inputNumber = inputNumber;
-        this.expectedResult = expectedResult;
-    }
 
     @Parameterized.Parameters
     public static Collection primeNumbers() {
@@ -43,6 +38,11 @@ public class ParameterisedTest {
                 {22, false},
                 {23, true}
         });
+    }
+
+    @Before
+    public void initialize() {
+        primeNumberChecker = new ParameterisedSUT();
     }
 
     // This test will run 4 times since we have 5 parameters defined

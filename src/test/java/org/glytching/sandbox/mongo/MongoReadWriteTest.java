@@ -12,7 +12,8 @@ import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +51,7 @@ public class MongoReadWriteTest {
     }
 
     @Test
+    @Disabled
     public void canFindByObjectId() {
         MongoClient mongoClient = new MongoClientFactory().create();
 
@@ -110,6 +112,7 @@ public class MongoReadWriteTest {
     }
 
     @Test
+    @Disabled
     public void canBulkWriteAndIdentifySpecificFailedDocuments() throws IOException {
         MongoClient mongoClient = new MongoClientFactory().create();
 

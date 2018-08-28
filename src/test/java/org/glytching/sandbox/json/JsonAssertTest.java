@@ -1,16 +1,11 @@
 package org.glytching.sandbox.json;
 
+import io.github.glytching.junit.extension.exception.ExpectedException;
 import org.json.JSONException;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import static org.hamcrest.Matchers.containsString;
-
 public class JsonAssertTest {
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void canAssertJsonEquality() throws JSONException {
@@ -41,6 +36,7 @@ public class JsonAssertTest {
     }
 
     @Test
+    @ExpectedException(type = AssertionError.class, messageContains = "\nExpected: prop1\n     but none found\n")
     public void willFailIfActualIsMissingAProperty() throws JSONException {
         String expected = "{\n" +
                 "  \"prop1\": \"value1\",\n" +
@@ -50,15 +46,11 @@ public class JsonAssertTest {
                 "  \"prop2\": \"value1\"\n" +
                 "}";
 
-        expectedException.expect(AssertionError.class);
-        expectedException.expectMessage(containsString("\n" +
-                "Expected: prop1\n" +
-                "     but none found\n"));
-
         JSONAssert.assertEquals(expected, actual, true);
     }
 
     @Test
+    @ExpectedException(type = AssertionError.class, messageContains = "prop1\nExpected: value1\n     got: value2\n")
     public void willFailIfActualHasAnIncorrectValue() throws JSONException {
         String expected = "{\n" +
                 "  \"prop1\": \"value1\",\n" +
@@ -68,11 +60,6 @@ public class JsonAssertTest {
                 "  \"prop1\": \"value2\",\n" +
                 "  \"prop2\": \"value1\"\n" +
                 "}";
-
-        expectedException.expect(AssertionError.class);
-        expectedException.expectMessage(containsString("prop1\n" +
-                "Expected: value1\n" +
-                "     got: value2\n"));
 
         JSONAssert.assertEquals(expected, actual, true);
     }

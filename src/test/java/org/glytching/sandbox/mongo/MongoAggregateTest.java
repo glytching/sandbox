@@ -9,8 +9,8 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,7 +125,7 @@ public class MongoAggregateTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void aDayOfYearAggregation() {
         MongoClient mongoClient = new MongoClientFactory().create();
 
@@ -151,7 +151,7 @@ public class MongoAggregateTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void aDayOfYearAggregationUsingRedact() {
         MongoClient mongoClient = new MongoClientFactory().create();
 

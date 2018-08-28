@@ -1,8 +1,9 @@
 package org.glytching.sandbox.logging;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +23,7 @@ public class HashCodeConverterTest {
         HashCodeConverter instance = new HashCodeConverter();
         String result = instance.convert(le);
         int iterationCount = 20;
-        for(int i=0; i<iterationCount; i++) {
+        for (int i = 0; i < iterationCount; i++) {
             String nextResult = instance.convert(le);
             assertEquals(result, nextResult);
         }

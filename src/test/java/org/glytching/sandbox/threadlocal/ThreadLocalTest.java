@@ -1,9 +1,10 @@
 package org.glytching.sandbox.threadlocal;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ThreadLocalTest {
     private static final Logger logger = LoggerFactory.getLogger(ThreadLocalTest.class);
@@ -15,7 +16,7 @@ public class ThreadLocalTest {
 
         ThreadLocalSUT.doSomeMethodHere();
 
-        Assert.assertNotNull(ThreadLocalSUT.REQUEST_HOLDER.get());
+        assertNotNull(ThreadLocalSUT.REQUEST_HOLDER.get());
         logger.info("Current thread id: {}", Thread.currentThread().getId());
     }
 

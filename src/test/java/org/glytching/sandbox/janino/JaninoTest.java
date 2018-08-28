@@ -3,10 +3,11 @@ package org.glytching.sandbox.janino;
 import ch.qos.logback.core.joran.conditional.Condition;
 import ch.qos.logback.core.joran.conditional.PropertyWrapperForScripts;
 import org.codehaus.janino.ClassBodyEvaluator;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.StringReader;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JaninoTest {
 
@@ -24,6 +25,6 @@ public class JaninoTest {
         Class clazz = classBodyEvaluator.getClazz();
         Condition instance = (Condition) clazz.newInstance();
 
-        Assert.assertTrue(instance.evaluate());
+        assertTrue(instance.evaluate());
     }
 }

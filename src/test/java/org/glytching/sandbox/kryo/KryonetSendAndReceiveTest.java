@@ -7,13 +7,14 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.jayway.awaitility.Awaitility;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * A crude Kryonet example, from a SO q+a
@@ -24,12 +25,12 @@ public class KryonetSendAndReceiveTest {
     private int port;
     private String response;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         startServer();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         stopServer();
     }
@@ -46,7 +47,7 @@ public class KryonetSendAndReceiveTest {
 
         Awaitility.await().until(() -> response != null);
 
-        Assert.assertNotNull(response);
+        assertNotNull(response);
     }
 
     private void startServer() throws IOException {
@@ -78,16 +79,6 @@ public class KryonetSendAndReceiveTest {
         }
     }
 
-    private class MessageListener extends Listener {
-
-        @Override
-        public void received(Connection connection, Object o) {
-            Message m = (Message) o;
-            response = m.message;
-            Log.debug(m.message);
-        }
-    }
-
     private static class Message {
         String message;
 
@@ -98,6 +89,16 @@ public class KryonetSendAndReceiveTest {
 
         Message(String message) {
             this.message = message;
+        }
+    }
+
+    private class MessageListener extends Listener {
+
+        @Override
+        public void received(Connection connection, Object o) {
+            Message m = (Message) o;
+            response = m.message;
+            Log.debug(m.message);
         }
     }
 }

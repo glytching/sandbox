@@ -4,11 +4,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class JSoupHeaderElementTest {
 
@@ -25,9 +27,9 @@ public class JSoupHeaderElementTest {
 
         try {
             validateHeaderElementOrdering(html);
-            Assert.fail("Expected out of order header elements to be deemed invalid!");
+            fail("Expected out of order header elements to be deemed invalid!");
         } catch (RuntimeException ex) {
-            Assert.assertEquals("Header tags are out of order: h3 came after h1", ex.getMessage());
+            assertEquals("Header tags are out of order: h3 came after h1", ex.getMessage());
         }
     }
 
@@ -37,9 +39,9 @@ public class JSoupHeaderElementTest {
 
         try {
             validateHeaderElementOrdering(html);
-            Assert.fail("Expected out of order header elements to be deemed invalid!");
+            fail("Expected out of order header elements to be deemed invalid!");
         } catch (RuntimeException ex) {
-            Assert.assertEquals("Header tags are out of order: h4 came after h2", ex.getMessage());
+            assertEquals("Header tags are out of order: h4 came after h2", ex.getMessage());
         }
     }
 
@@ -49,9 +51,9 @@ public class JSoupHeaderElementTest {
 
         try {
             validateHeaderElementOrdering(html);
-            Assert.fail("Expected out of order header elements to be deemed invalid!");
+            fail("Expected out of order header elements to be deemed invalid!");
         } catch (RuntimeException ex) {
-            Assert.assertEquals("Header tags are out of order, there's only one header tag and it is not h1!", ex.getMessage());
+            assertEquals("Header tags are out of order, there's only one header tag and it is not h1!", ex.getMessage());
         }
     }
 

@@ -6,12 +6,12 @@ import org.hamcrest.Description;
 public class IgnoresAllWhitespacesMatcher extends BaseMatcher<String> {
     public String expected;
 
-    public static IgnoresAllWhitespacesMatcher ignoresAllWhitespaces(String expected) {
-        return new IgnoresAllWhitespacesMatcher(expected);
-    }
-
     private IgnoresAllWhitespacesMatcher(String expected) {
         this.expected = expected.replaceAll("\\s+", "");
+    }
+
+    public static IgnoresAllWhitespacesMatcher ignoresAllWhitespaces(String expected) {
+        return new IgnoresAllWhitespacesMatcher(expected);
     }
 
     @Override

@@ -38,13 +38,13 @@ public class HamcrestSUT {
         public String name;
         public int id;
 
-        public static CustomMatcher matches(String name, int id) {
-            return new CustomMatcher(name, id);
-        }
-
         private CustomMatcher(String name, int id) {
             this.name = name;
             this.id = id;
+        }
+
+        public static CustomMatcher matches(String name, int id) {
+            return new CustomMatcher(name, id);
         }
 
         @Override

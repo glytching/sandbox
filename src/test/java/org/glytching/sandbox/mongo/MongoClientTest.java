@@ -3,7 +3,7 @@ package org.glytching.sandbox.mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.ListDatabasesIterable;
 import org.bson.Document;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

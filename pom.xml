@@ -12,7 +12,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
         <junit.platform.version>1.2.0</junit.platform.version>
-        <!--<excludedCategories></excludedCategories>-->
         <testExclusionPattern></testExclusionPattern>
     </properties>
 
@@ -40,7 +39,6 @@
                     <excludes>
                         <exclude>${testExclusionPattern}</exclude>
                     </excludes>
-                    <!--<excludedGroups>${excludedCategories}</excludedGroups>-->
                 </configuration>
                 <dependencies>
                     <!-- integrates JUnit5 with surefire -->
@@ -273,6 +271,12 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.glytching</groupId>
+            <artifactId>junit-extensions</artifactId>
+            <version>2.2.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

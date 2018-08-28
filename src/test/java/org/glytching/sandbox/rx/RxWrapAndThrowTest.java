@@ -1,7 +1,7 @@
 package org.glytching.sandbox.rx;
 
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import static org.glytching.sandbox.rx.RxMapWrapper.wrapAndThrow;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class RxWrapAndThrowTest {
     private static final Logger logger = LoggerFactory.getLogger(RxWrapAndThrowTest.class);

@@ -3,14 +3,14 @@ package org.glytching.sandbox.gson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GsonTest {
 
@@ -23,7 +23,8 @@ public class GsonTest {
         String json = gson.toJson(incomings);
 
         // use TypeToken to inform Gson about the type of the elements in the generic list
-        List<GsonSUT> fromJson = gson.fromJson(json, new TypeToken<ArrayList<GsonSUT>>(){}.getType());
+        List<GsonSUT> fromJson = gson.fromJson(json, new TypeToken<ArrayList<GsonSUT>>() {
+        }.getType());
 
         assertEquals(2, fromJson.size());
         for (GsonSUT incoming : incomings) {
