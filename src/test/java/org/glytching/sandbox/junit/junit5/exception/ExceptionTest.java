@@ -1,5 +1,6 @@
 package org.glytching.sandbox.junit.junit5.exception;
 
+import org.glytching.sandbox.junit.ExceptionSUT;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

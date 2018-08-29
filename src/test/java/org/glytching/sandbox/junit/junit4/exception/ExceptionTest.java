@@ -1,5 +1,6 @@
 package org.glytching.sandbox.junit.junit4.exception;
 
+import org.glytching.sandbox.junit.ExceptionSUT;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

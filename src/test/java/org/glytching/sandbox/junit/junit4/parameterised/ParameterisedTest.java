@@ -1,5 +1,6 @@
 package org.glytching.sandbox.junit.junit4.parameterised;
 
+import org.glytching.sandbox.junit.ParameterisedSUT;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
