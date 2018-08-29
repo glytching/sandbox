@@ -2,7 +2,9 @@ package org.glytching.sandbox.jsonpath;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import com.jayway.jsonpath.*;
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import net.minidev.json.JSONArray;
 import org.hamcrest.Matchers;
@@ -88,6 +90,24 @@ public class JsonPathTest {
             "        }\n" +
             "    ]\n" +
             "}";
+
+    @Test
+    public void canParseToJson() {
+        String json = "{\n" +
+                "    \"file01\": {\n" +
+                "        \"id\": \"0001\"\n" +
+                "    },\n" +
+                "    \"file02\": {\n" +
+                "        \"id\": \"0002\"\n" +
+                "    }\n" +
+                "}";
+
+        Configuration conf = Configuration.builder().jsonProvider(new GsonJsonProvider()).build();
+
+        JsonObject file01 = JsonPath.using(conf).parse(json).read("$.file01");
+
+        assertThat(file01.toString(), is("{\"id\":\"0001\"}"));
+    }
 
     @Test
     public void canReadAnIntegerAsLong() {
