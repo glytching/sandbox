@@ -37,4 +37,9 @@ public class LogbackTest {
     public void testLogException() {
         logger.info("Boom!", new RuntimeException("ouch"));
     }
+
+    @Test
+    public void testLog() {
+        logger.error("Boom!", new RuntimeException("ouch"));
+    }
 }

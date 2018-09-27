@@ -1,7 +1,8 @@
 <configuration>
 
     <conversionRule conversionWord="hc" converterClass="org.glytching.sandbox.logging.HashCodeConverter"/>
-    
+    <conversionRule conversionWord="exname" converterClass="org.glytching.sandbox.logging.ExceptionNameConverter"/>
+
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>hash-code-converter-it.log</file>
         <append>false</append>
@@ -10,8 +11,16 @@
         </encoder>
     </appender>
 
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%hc] [%exname] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <logger name="org.glytching.sandbox.logging.HashCodeConverterIT" level="INFO"/>
+
     <root level="INFO">
         <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
     </root>
 </configuration>
