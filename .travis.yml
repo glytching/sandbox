@@ -1,14 +1,10 @@
 language: java
 
 jdk:
-  - oraclejdk9
-
-addons:
-  apt:
-    packages:
-      - oracle-java9-installer
+    - oraclejdk11
 
 sudo: false
+
 script: mvn verify javadoc:javadoc -Ptravis
 
 #deploy:
