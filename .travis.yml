@@ -1,7 +1,6 @@
 language: java
 
-jdk:
-    - oraclejdk11
+jdk: openjdk11
 
 sudo: false
 
