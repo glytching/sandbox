@@ -1,17 +1,11 @@
 language: java
 
-jdk: openjdk11
+jdk:
+  - openjdk11
 
 sudo: false
 
-script: mvn verify javadoc:javadoc -Ptravis
-
-#deploy:
-#  provider: pages
-#  skip_cleanup: true
-#  local_dir: target/site/apidocs
-#  on:
-#    branch: master
+script: "mvn verify javadoc:javadoc -Ptravis"
 
 notifications:
   email:
