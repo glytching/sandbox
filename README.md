@@ -7,4 +7,4 @@ This sandbox is for spikes, experiments, code arising from [StackOverflow answer
 
 ##### Build Status
 
-[![Build Status](https://travis-ci.org/glytching/sandbox.svg?branch=master)](https://travis-ci.org/glytching/sandbox)
+[![Build Status](https://circleci.com/gh/glytching/sandbox.svg?style=svg)](https://circleci.com/gh/glytching/sandbox)
